@@ -5,7 +5,8 @@
 
 # 注意点
 spring.cloud.sentinel.filter.enabled注解原理，开启关闭对比
-@SentinelResource 
+根据项目需要，如果全部接口都要，则开启true。部分接口限流，用
+@SentinelResource注解 
 
 
 
