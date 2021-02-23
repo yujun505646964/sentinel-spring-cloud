@@ -10,5 +10,5 @@ spring:
         port: 8719
       filter:
         enabled: false
-      eager: false
+      eager: true
       enabled: true
