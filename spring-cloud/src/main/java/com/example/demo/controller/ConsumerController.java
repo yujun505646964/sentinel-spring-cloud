@@ -26,9 +26,10 @@ public class ConsumerController {
     }
 
 
-    @GetMapping("/post")
-    public String post() {
-        return "POST 请求";
+    @GetMapping("/hello")
+    @SentinelResource(value = "/hello")
+    public String hello() {
+        return "hello world";
     }
 
     @DeleteMapping("/delete")
