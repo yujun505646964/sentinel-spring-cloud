@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
-import com.alibaba.csp.sentinel.slots.block.flow.FlowException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,18 +11,18 @@ import org.springframework.web.bind.annotation.*;
 public class ConsumerController {
 
     /*
-     * blockHandler 方法必须public ,切返回值相同，参数相同，异常
+     * blockHandler 方法必须public ,切返回值相同，参数相同，异常必须为BlockException
      * */
     @SentinelResource(value = "/spring/hello", blockHandler = "exceptionHandler")
-    @GetMapping("/hello")
-    public String hello() {
-        return "你好,hello";
+    @GetMapping("/block")
+    public String block(@RequestParam String name) {
+        throw new RuntimeException("发生异常");
     }
 
-    @SentinelResource(value = "/spring/helloName/{name}")
-    @GetMapping("/helloName/{name}")
-    public String helloName(@PathVariable String name) {
-        return "你好," + name;
+    @SentinelResource(value = "/spring/helloName/{name}", fallback = "fallbackHandler")
+    @GetMapping("/fallback")
+    public String fallback() {
+        throw new RuntimeException("发生异常");
     }
 
 
@@ -38,12 +37,13 @@ public class ConsumerController {
     }
 
 
-    public String exceptionHandler(BlockException ex) {
+    public String exceptionHandler(String name, BlockException ex) {
         System.out.println("blockHandler");
         return "blockHandler";
     }
 
-    public void fallbackHandler(String str) {
-        log.error("fallbackHandler：" + str);
+    public String fallbackHandler() {
+        System.out.println("fallbackHandler");
+        return "fallbackHandler";
     }
 }
