@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
+import com.example.demo.sentinel.BlockHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,9 +28,14 @@ public class ConsumerController {
 
 
     @GetMapping("/hello")
-    @SentinelResource(value = "/hello")
+    @SentinelResource(value = "/hello",blockHandlerClass = BlockHandler.class,blockHandler = "helloBlockHandler")
     public String hello() {
         return "hello world";
+    }
+
+    @GetMapping("/hello2")
+    public String hello2() {
+        return "hello world----------2";
     }
 
     @DeleteMapping("/delete")
@@ -37,11 +43,6 @@ public class ConsumerController {
         return "DELETE 请求";
     }
 
-
-    public String exceptionHandler(String name, BlockException ex) {
-        System.out.println("blockHandler");
-        return "blockHandler";
-    }
 
     public String fallbackHandler() {
         System.out.println("fallbackHandler");

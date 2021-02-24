@@ -1,0 +1,22 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        username: nacos
+        password: nacos
+        context-path: /nacos
+        server-addr: 121.40.116.220:8848
+        namespace:
+      discovery:
+        username: nacos
+        password: nacos
+        context-path: /nacos
+        server-addr: 121.40.116.220:8848
+        namespace:
+sentinel:
+  nacos:
+    server:
+      ip: 121.40.116.220
+      port: 8848
+      namespace: sentinel
+      groupId: SENTINEL_GROUP

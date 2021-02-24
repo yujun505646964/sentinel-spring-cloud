@@ -8,8 +8,7 @@ spring.cloud.sentinel.filter.enabled注解原理，开启关闭对比
 根据项目需要，如果全部接口都要，则开启true。部分接口限流，用
 @SentinelResource注解 
 
-spring.cloud.sentinel.filter.enabled =false
-为什么控制台流控规则不能点？
+定义的全局异常处理器只能作用到Spring cloud 自动注册的resource，@sentinelResource的注解不起作用
 
 
 # 延伸阅读
@@ -25,5 +24,6 @@ https://blog.csdn.net/luanlouis/article/details/91633042
 https://blog.csdn.net/lzb348110175/article/details/107634024
 https://www.jianshu.com/p/b61727df6ea5
 
+https://www.jianshu.com/p/c3d441bf4064
 
 
