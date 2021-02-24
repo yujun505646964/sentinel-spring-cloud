@@ -10,6 +10,14 @@ spring.cloud.sentinel.filter.enabled注解原理，开启关闭对比
 
 定义的全局异常处理器只能作用到Spring cloud 自动注册的resource，@sentinelResource的注解不起作用
 
+SystemRuleManager 
+if (resourceWrapper.getEntryType() != EntryType.IN) {
+            return;
+        }
+
+AbstractSentinelInterceptor
+Entry entry = SphU.entry(resourceName, ResourceTypeConstants.COMMON_WEB, EntryType.IN);
+
 
 # 延伸阅读
 
