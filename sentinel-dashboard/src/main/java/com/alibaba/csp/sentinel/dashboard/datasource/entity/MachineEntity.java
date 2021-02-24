@@ -15,9 +15,9 @@
  */
 package com.alibaba.csp.sentinel.dashboard.datasource.entity;
 
-import java.util.Date;
-
 import com.alibaba.csp.sentinel.dashboard.discovery.MachineInfo;
+
+import java.util.Date;
 
 /**
  * @author leyou
@@ -112,14 +112,14 @@ public class MachineEntity {
     @Override
     public String toString() {
         return "MachineEntity{" +
-            "id=" + id +
-            ", gmtCreate=" + gmtCreate +
-            ", gmtModified=" + gmtModified +
-            ", app='" + app + '\'' +
-            ", ip='" + ip + '\'' +
-            ", hostname='" + hostname + '\'' +
-            ", timestamp=" + timestamp +
-            ", port=" + port +
-            '}';
+                "id=" + id +
+                ", gmtCreate=" + gmtCreate +
+                ", gmtModified=" + gmtModified +
+                ", app='" + app + '\'' +
+                ", ip='" + ip + '\'' +
+                ", hostname='" + hostname + '\'' +
+                ", timestamp=" + timestamp +
+                ", port=" + port +
+                '}';
     }
 }

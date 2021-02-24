@@ -32,13 +32,21 @@ import java.util.Objects;
 public class GatewayFlowRuleEntity implements RuleEntity {
 
     /**间隔单位*/
-    /**0-秒*/
+    /**
+     * 0-秒
+     */
     public static final int INTERVAL_UNIT_SECOND = 0;
-    /**1-分*/
+    /**
+     * 1-分
+     */
     public static final int INTERVAL_UNIT_MINUTE = 1;
-    /**2-时*/
+    /**
+     * 2-时
+     */
     public static final int INTERVAL_UNIT_HOUR = 2;
-    /**3-天*/
+    /**
+     * 3-天
+     */
     public static final int INTERVAL_UNIT_DAY = 3;
 
     private Long id;
@@ -83,18 +91,18 @@ public class GatewayFlowRuleEntity implements RuleEntity {
 
     public static Object[] parseIntervalSec(Long intervalSec) {
         if (intervalSec % (60 * 60 * 24) == 0) {
-            return new Object[] {intervalSec / (60 * 60 * 24), INTERVAL_UNIT_DAY};
+            return new Object[]{intervalSec / (60 * 60 * 24), INTERVAL_UNIT_DAY};
         }
 
-        if (intervalSec % (60 * 60 ) == 0) {
-            return new Object[] {intervalSec / (60 * 60), INTERVAL_UNIT_HOUR};
+        if (intervalSec % (60 * 60) == 0) {
+            return new Object[]{intervalSec / (60 * 60), INTERVAL_UNIT_HOUR};
         }
 
         if (intervalSec % 60 == 0) {
-            return new Object[] {intervalSec / 60, INTERVAL_UNIT_MINUTE};
+            return new Object[]{intervalSec / 60, INTERVAL_UNIT_MINUTE};
         }
 
-        return new Object[] {intervalSec, INTERVAL_UNIT_SECOND};
+        return new Object[]{intervalSec, INTERVAL_UNIT_SECOND};
     }
 
     public GatewayFlowRule toGatewayFlowRule() {
@@ -304,8 +312,12 @@ public class GatewayFlowRuleEntity implements RuleEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) { return true; }
-        if (o == null || getClass() != o.getClass()) { return false; }
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         GatewayFlowRuleEntity that = (GatewayFlowRuleEntity) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(app, that.app) &&

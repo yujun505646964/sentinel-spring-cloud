@@ -38,7 +38,7 @@ public class FlowRuleZookeeperProvider implements DynamicRuleProvider<List<FlowR
     public List<FlowRuleEntity> getRules(String appName) throws Exception {
         String zkPath = ZookeeperConfigUtil.getPath(appName);
         Stat stat = zkClient.checkExists().forPath(zkPath);
-        if(stat == null){
+        if (stat == null) {
             return new ArrayList<>(0);
         }
         byte[] bytes = zkClient.getData().forPath(zkPath);

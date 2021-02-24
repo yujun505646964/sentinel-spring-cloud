@@ -38,9 +38,10 @@ import java.util.Properties;
 public class NacosConfig {
 
     @Value("${nacos.namespace}")
-    private String namespace= null;
+    private String namespace = null;
     @Value("${nacos.serverAddr}")
-    private String serverAddr= "localhost:8848";
+    private String serverAddr = "localhost:8848";
+
     @Bean
     public Converter<List<FlowRuleEntity>, String> flowRuleEntityEncoder() {
         return JSON::toJSONString;
@@ -50,11 +51,13 @@ public class NacosConfig {
     public Converter<String, List<FlowRuleEntity>> flowRuleEntityDecoder() {
         return s -> JSON.parseArray(s, FlowRuleEntity.class);
     }
+
     //
     @Bean
     public Converter<List<DegradeRuleEntity>, String> degradeRuleEntityEncoder() {
         return JSON::toJSONString;
     }
+
     @Bean
     public Converter<String, List<DegradeRuleEntity>> degradeRuleEntityDecoder() {
         return s -> JSON.parseArray(s, DegradeRuleEntity.class);
@@ -64,6 +67,7 @@ public class NacosConfig {
     public Converter<List<SystemRuleEntity>, String> systemRuleEntityEncoder() {
         return JSON::toJSONString;
     }
+
     @Bean
     public Converter<String, List<SystemRuleEntity>> systemRuleEntityDecoder() {
         return s -> JSON.parseArray(s, SystemRuleEntity.class);
@@ -73,6 +77,7 @@ public class NacosConfig {
     public Converter<List<AuthorityRuleEntity>, String> authorityRuleEntityEncoder() {
         return JSON::toJSONString;
     }
+
     @Bean
     public Converter<String, List<AuthorityRuleEntity>> authorityRuleEntityDecoder() {
         return s -> JSON.parseArray(s, AuthorityRuleEntity.class);
@@ -82,6 +87,7 @@ public class NacosConfig {
     public Converter<List<ParamFlowRuleEntity>, String> paramFlowRuleEntityEncoder() {
         return JSON::toJSONString;
     }
+
     @Bean
     public Converter<String, List<ParamFlowRuleEntity>> paramFlowRuleEntityDecoder() {
         return s -> JSON.parseArray(s, ParamFlowRuleEntity.class);
@@ -91,6 +97,7 @@ public class NacosConfig {
     public Converter<List<GatewayFlowRuleEntity>, String> gatewayFlowRuleEntityEncoder() {
         return JSON::toJSONString;
     }
+
     @Bean
     public Converter<String, List<GatewayFlowRuleEntity>> gatewayFlowRuleEntityDecoder() {
         return s -> JSON.parseArray(s, GatewayFlowRuleEntity.class);
@@ -100,6 +107,7 @@ public class NacosConfig {
     public Converter<List<ApiDefinitionEntity>, String> apiDefinitionRuleEntityEncoder() {
         return JSON::toJSONString;
     }
+
     @Bean
     public Converter<String, List<ApiDefinitionEntity>> apiDefinitionRuleEntityDecoder() {
         return s -> JSON.parseArray(s, ApiDefinitionEntity.class);
@@ -113,8 +121,8 @@ public class NacosConfig {
                 //groupId = "SENTINEL_GROUP";
                 //dataId = "SentinelConfig.json";*/
         Properties properties = new Properties();
-        properties.setProperty(PropertyKeyConst.NAMESPACE,namespace);
-        properties.setProperty(PropertyKeyConst.SERVER_ADDR,serverAddr);
+        properties.setProperty(PropertyKeyConst.NAMESPACE, namespace);
+        properties.setProperty(PropertyKeyConst.SERVER_ADDR, serverAddr);
         return ConfigFactory.createConfigService(properties);
     }
 }

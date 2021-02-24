@@ -50,7 +50,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
-import static com.alibaba.csp.sentinel.adapter.gateway.common.SentinelGatewayConstants.*;
+import static com.alibaba.csp.sentinel.adapter.gateway.common.SentinelGatewayConstants.URL_MATCH_STRATEGY_EXACT;
+import static com.alibaba.csp.sentinel.adapter.gateway.common.SentinelGatewayConstants.URL_MATCH_STRATEGY_PREFIX;
 import static org.junit.Assert.*;
 import static org.mockito.BDDMockito.*;
 
@@ -145,7 +146,8 @@ public class GatewayApiControllerTest {
         verify(sentinelApiClient).fetchApis(TEST_APP, TEST_IP, TEST_PORT);
 
         // Verify if two same entities are got
-        Result<List<ApiDefinitionEntity>> result = JSONObject.parseObject(mvcResult.getResponse().getContentAsString(), new TypeReference<Result<List<ApiDefinitionEntity>>>(){});
+        Result<List<ApiDefinitionEntity>> result = JSONObject.parseObject(mvcResult.getResponse().getContentAsString(), new TypeReference<Result<List<ApiDefinitionEntity>>>() {
+        });
         assertTrue(result.isSuccess());
 
         List<ApiDefinitionEntity> data = result.getData();
@@ -183,13 +185,14 @@ public class GatewayApiControllerTest {
 
         // Do controller logic
         MvcResult mvcResult = mockMvc.perform(requestBuilder)
-            .andExpect(MockMvcResultMatchers.status().isOk())
-            .andDo(MockMvcResultHandlers.print()).andReturn();
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print()).andReturn();
 
         // Verify the modifyApis method has been called
         verify(sentinelApiClient).modifyApis(eq(TEST_APP), eq(TEST_IP), eq(TEST_PORT), any());
 
-        Result<ApiDefinitionEntity> result = JSONObject.parseObject(mvcResult.getResponse().getContentAsString(), new TypeReference<Result<ApiDefinitionEntity>>() {});
+        Result<ApiDefinitionEntity> result = JSONObject.parseObject(mvcResult.getResponse().getContentAsString(), new TypeReference<Result<ApiDefinitionEntity>>() {
+        });
         assertTrue(result.isSuccess());
 
         // Verify the result
@@ -260,7 +263,8 @@ public class GatewayApiControllerTest {
         // Verify the modifyApis method has been called
         verify(sentinelApiClient).modifyApis(eq(TEST_APP), eq(TEST_IP), eq(TEST_PORT), any());
 
-        Result<ApiDefinitionEntity> result = JSONObject.parseObject(mvcResult.getResponse().getContentAsString(), new TypeReference<Result<ApiDefinitionEntity>>() {});
+        Result<ApiDefinitionEntity> result = JSONObject.parseObject(mvcResult.getResponse().getContentAsString(), new TypeReference<Result<ApiDefinitionEntity>>() {
+        });
         assertTrue(result.isSuccess());
 
         ApiDefinitionEntity entity = result.getData();
@@ -316,7 +320,8 @@ public class GatewayApiControllerTest {
         verify(sentinelApiClient).modifyApis(eq(TEST_APP), eq(TEST_IP), eq(TEST_PORT), any());
 
         // Verify the result
-        Result<Long> result = JSONObject.parseObject(mvcResult.getResponse().getContentAsString(), new TypeReference<Result<Long>>() {});
+        Result<Long> result = JSONObject.parseObject(mvcResult.getResponse().getContentAsString(), new TypeReference<Result<Long>>() {
+        });
         assertTrue(result.isSuccess());
 
         assertEquals(addEntity.getId(), result.getData());

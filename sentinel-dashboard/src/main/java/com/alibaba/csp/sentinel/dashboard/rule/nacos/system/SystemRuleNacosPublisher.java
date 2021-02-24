@@ -6,7 +6,7 @@ import com.alibaba.csp.sentinel.dashboard.rule.nacos.RuleNacosPublisher;
 import org.springframework.stereotype.Component;
 
 @Component("systemRuleNacosPublisher")
-public class SystemRuleNacosPublisher  extends RuleNacosPublisher<SystemRuleEntity> {
+public class SystemRuleNacosPublisher extends RuleNacosPublisher<SystemRuleEntity> {
     @Override
     public String getDataIdPostfix() {
         return NacosConfigUtil.SYSTEM_DATA_ID_POSTFIX;

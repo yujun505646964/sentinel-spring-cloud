@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.example.demo.sentinel.BlockHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +27,7 @@ public class ConsumerController {
 
 
     @GetMapping("/hello")
-    @SentinelResource(value = "/hello",blockHandlerClass = BlockHandler.class,blockHandler = "helloBlockHandler")
+    @SentinelResource(value = "/hello", blockHandlerClass = BlockHandler.class, blockHandler = "helloBlockHandler")
     public String hello() {
         return "hello world";
     }

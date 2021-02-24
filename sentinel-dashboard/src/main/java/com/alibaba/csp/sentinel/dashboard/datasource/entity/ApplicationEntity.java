@@ -15,9 +15,9 @@
  */
 package com.alibaba.csp.sentinel.dashboard.datasource.entity;
 
-import java.util.Date;
-
 import com.alibaba.csp.sentinel.dashboard.discovery.AppInfo;
+
+import java.util.Date;
 
 /**
  * @author leyou
@@ -95,12 +95,12 @@ public class ApplicationEntity {
     @Override
     public String toString() {
         return "ApplicationEntity{" +
-            "id=" + id +
-            ", gmtCreate=" + gmtCreate +
-            ", gmtModified=" + gmtModified +
-            ", app='" + app + '\'' +
-            ", activeConsole='" + activeConsole + '\'' +
-            ", lastFetch=" + lastFetch +
-            '}';
+                "id=" + id +
+                ", gmtCreate=" + gmtCreate +
+                ", gmtModified=" + gmtModified +
+                ", app='" + app + '\'' +
+                ", activeConsole='" + activeConsole + '\'' +
+                ", lastFetch=" + lastFetch +
+                '}';
     }
 }

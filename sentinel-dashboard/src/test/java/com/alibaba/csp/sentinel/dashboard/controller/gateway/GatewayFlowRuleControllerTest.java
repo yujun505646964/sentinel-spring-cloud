@@ -52,8 +52,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-import static com.alibaba.csp.sentinel.slots.block.RuleConstant.*;
 import static com.alibaba.csp.sentinel.adapter.gateway.common.SentinelGatewayConstants.*;
+import static com.alibaba.csp.sentinel.slots.block.RuleConstant.*;
 import static org.junit.Assert.*;
 import static org.mockito.BDDMockito.*;
 
@@ -65,7 +65,7 @@ import static org.mockito.BDDMockito.*;
 @RunWith(SpringRunner.class)
 @WebMvcTest(GatewayFlowRuleController.class)
 @Import({FakeAuthServiceImpl.class, InMemGatewayFlowRuleStore.class, AppManagement.class, SimpleMachineDiscovery.class,
-        AuthorizationInterceptor.class })
+        AuthorizationInterceptor.class})
 public class GatewayFlowRuleControllerTest {
 
     private static final String TEST_APP = "test_app";
@@ -151,7 +151,8 @@ public class GatewayFlowRuleControllerTest {
         verify(sentinelApiClient).fetchGatewayFlowRules(TEST_APP, TEST_IP, TEST_PORT);
 
         // Verify if two same entities are got
-        Result<List<GatewayFlowRuleEntity>> result = JSONObject.parseObject(mvcResult.getResponse().getContentAsString(), new TypeReference<Result<List<GatewayFlowRuleEntity>>>(){});
+        Result<List<GatewayFlowRuleEntity>> result = JSONObject.parseObject(mvcResult.getResponse().getContentAsString(), new TypeReference<Result<List<GatewayFlowRuleEntity>>>() {
+        });
         assertTrue(result.isSuccess());
 
         List<GatewayFlowRuleEntity> data = result.getData();
@@ -197,7 +198,8 @@ public class GatewayFlowRuleControllerTest {
         // Verify the modifyGatewayFlowRules method has been called
         verify(sentinelApiClient).modifyGatewayFlowRules(eq(TEST_APP), eq(TEST_IP), eq(TEST_PORT), any());
 
-        Result<GatewayFlowRuleEntity> result = JSONObject.parseObject(mvcResult.getResponse().getContentAsString(), new TypeReference<Result<GatewayFlowRuleEntity>>() {});
+        Result<GatewayFlowRuleEntity> result = JSONObject.parseObject(mvcResult.getResponse().getContentAsString(), new TypeReference<Result<GatewayFlowRuleEntity>>() {
+        });
         assertTrue(result.isSuccess());
 
         // Verify the result
@@ -345,7 +347,8 @@ public class GatewayFlowRuleControllerTest {
         verify(sentinelApiClient).modifyGatewayFlowRules(eq(TEST_APP), eq(TEST_IP), eq(TEST_PORT), any());
 
         // Verify the result
-        Result<Long> result = JSONObject.parseObject(mvcResult.getResponse().getContentAsString(), new TypeReference<Result<Long>>() {});
+        Result<Long> result = JSONObject.parseObject(mvcResult.getResponse().getContentAsString(), new TypeReference<Result<Long>>() {
+        });
         assertTrue(result.isSuccess());
 
         assertEquals(addEntity.getId(), result.getData());

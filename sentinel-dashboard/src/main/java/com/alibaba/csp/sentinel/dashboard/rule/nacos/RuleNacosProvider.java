@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class RuleNacosProvider <T extends RuleEntity>  implements DynamicRuleProvider<List<T>> {
+public abstract class RuleNacosProvider<T extends RuleEntity> implements DynamicRuleProvider<List<T>> {
     @Autowired
     protected ConfigService configService;
     @Autowired
@@ -28,6 +28,7 @@ public abstract class RuleNacosProvider <T extends RuleEntity>  implements Dynam
 
     /**
      * 文件后缀 参考 com.alibaba.csp.sentinel.dashboard.rule.nacos.NacosConfigUtil.FLOW_DATA_ID_POSTFIX
+     *
      * @return
      */
     public abstract String getDataIdPostfix();

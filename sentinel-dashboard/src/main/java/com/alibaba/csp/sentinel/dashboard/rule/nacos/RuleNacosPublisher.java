@@ -25,8 +25,10 @@ public abstract class RuleNacosPublisher<T extends RuleEntity> implements Dynami
         configService.publishConfig(app + getDataIdPostfix(),
                 NacosConfigUtil.GROUP_ID, converter.convert(rules));
     }
+
     /**
      * 文件后缀 参考 com.alibaba.csp.sentinel.dashboard.rule.nacos.NacosConfigUtil.FLOW_DATA_ID_POSTFIX
+     *
      * @return
      */
     public abstract String getDataIdPostfix();

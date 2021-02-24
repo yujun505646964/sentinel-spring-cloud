@@ -57,8 +57,12 @@ public class ApiPredicateItemEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) { return true; }
-        if (o == null || getClass() != o.getClass()) { return false; }
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         ApiPredicateItemEntity that = (ApiPredicateItemEntity) o;
         return Objects.equals(pattern, that.pattern) &&
                 Objects.equals(matchStrategy, that.matchStrategy);

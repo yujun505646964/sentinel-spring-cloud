@@ -15,12 +15,12 @@
  */
 package com.alibaba.csp.sentinel.dashboard.domain;
 
+import com.alibaba.csp.sentinel.command.vo.NodeVo;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.alibaba.csp.sentinel.command.vo.NodeVo;
 
 /**
  * @author leyou
@@ -97,7 +97,7 @@ public class ResourceTreeNode {
     private boolean search(ResourceTreeNode node, String searchKey) {
         // empty matches all
         if (searchKey == null || searchKey.isEmpty() ||
-            node.resource.toLowerCase().contains(searchKey.toLowerCase())) {
+                node.resource.toLowerCase().contains(searchKey.toLowerCase())) {
             node.visible = true;
         } else {
             node.visible = false;

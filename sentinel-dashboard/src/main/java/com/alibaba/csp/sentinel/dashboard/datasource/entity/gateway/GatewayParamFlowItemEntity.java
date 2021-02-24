@@ -69,8 +69,12 @@ public class GatewayParamFlowItemEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) { return true; }
-        if (o == null || getClass() != o.getClass()) { return false; }
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         GatewayParamFlowItemEntity that = (GatewayParamFlowItemEntity) o;
         return Objects.equals(parseStrategy, that.parseStrategy) &&
                 Objects.equals(fieldName, that.fieldName) &&

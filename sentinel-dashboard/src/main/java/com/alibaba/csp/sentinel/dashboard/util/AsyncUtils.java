@@ -15,14 +15,14 @@
  */
 package com.alibaba.csp.sentinel.dashboard.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author Eric Zhao
@@ -40,18 +40,18 @@ public final class AsyncUtils {
 
     public static <R> CompletableFuture<List<R>> sequenceFuture(List<CompletableFuture<R>> futures) {
         return CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
-            .thenApply(v -> futures.stream()
-                .map(AsyncUtils::getValue)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList())
-            );
+                .thenApply(v -> futures.stream()
+                        .map(AsyncUtils::getValue)
+                        .filter(Objects::nonNull)
+                        .collect(Collectors.toList())
+                );
     }
 
     public static <R> CompletableFuture<List<R>> sequenceSuccessFuture(List<CompletableFuture<R>> futures) {
         return CompletableFuture.supplyAsync(() -> futures.parallelStream()
-            .map(AsyncUtils::getValue)
-            .filter(Objects::nonNull)
-            .collect(Collectors.toList())
+                .map(AsyncUtils::getValue)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList())
         );
     }
 
@@ -68,5 +68,6 @@ public final class AsyncUtils {
         return future.isDone() && !future.isCompletedExceptionally() && !future.isCancelled();
     }
 
-    private AsyncUtils() {}
+    private AsyncUtils() {
+    }
 }

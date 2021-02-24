@@ -15,17 +15,17 @@
  */
 package com.alibaba.csp.sentinel.dashboard.client;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import org.apache.http.HttpException;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.protocol.RequestContent;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.http.HttpException;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.protocol.RequestContent;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class SentinelApiClientTest {
     @Test
@@ -37,15 +37,15 @@ public class SentinelApiClientTest {
         params.put("a", "1");
         params.put("b", "2+");
         params.put("c", "3 ");
-        
+
         HttpUriRequest request;
-        
+
         request = SentinelApiClient.postRequest("/test", params, false);
         assertNotNull(request);
         processor.process(request, null);
         assertNotNull(request.getFirstHeader("Content-Type"));
         assertEquals("application/x-www-form-urlencoded", request.getFirstHeader("Content-Type").getValue());
-        
+
         request = SentinelApiClient.postRequest("/test", params, true);
         assertNotNull(request);
         processor.process(request, null);

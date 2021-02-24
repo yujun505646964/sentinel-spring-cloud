@@ -15,18 +15,11 @@
  */
 package com.alibaba.csp.sentinel.dashboard.controller.cluster;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.ExecutionException;
-
 import com.alibaba.csp.sentinel.cluster.ClusterStateManager;
 import com.alibaba.csp.sentinel.dashboard.client.CommandNotFoundException;
-import com.alibaba.csp.sentinel.dashboard.discovery.AppManagement;
-import com.alibaba.csp.sentinel.util.StringUtil;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-
 import com.alibaba.csp.sentinel.dashboard.datasource.entity.SentinelVersion;
+import com.alibaba.csp.sentinel.dashboard.discovery.AppManagement;
+import com.alibaba.csp.sentinel.dashboard.domain.Result;
 import com.alibaba.csp.sentinel.dashboard.domain.cluster.request.ClusterClientModifyRequest;
 import com.alibaba.csp.sentinel.dashboard.domain.cluster.request.ClusterModifyRequest;
 import com.alibaba.csp.sentinel.dashboard.domain.cluster.request.ClusterServerModifyRequest;
@@ -37,17 +30,17 @@ import com.alibaba.csp.sentinel.dashboard.domain.cluster.state.ClusterUniversalS
 import com.alibaba.csp.sentinel.dashboard.service.ClusterConfigService;
 import com.alibaba.csp.sentinel.dashboard.util.ClusterEntityUtils;
 import com.alibaba.csp.sentinel.dashboard.util.VersionUtils;
-import com.alibaba.csp.sentinel.dashboard.domain.Result;
+import com.alibaba.csp.sentinel.util.StringUtil;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 
 /**
  * @author Eric Zhao
@@ -134,8 +127,8 @@ public class ClusterConfigController {
         }
         try {
             return clusterConfigService.getClusterUniversalState(app, ip, port)
-                .thenApply(Result::ofSuccess)
-                .get();
+                    .thenApply(Result::ofSuccess)
+                    .get();
         } catch (ExecutionException ex) {
             logger.error("Error when fetching cluster state", ex.getCause());
             return errorResponse(ex);
@@ -152,9 +145,9 @@ public class ClusterConfigController {
         }
         try {
             return clusterConfigService.getClusterUniversalState(app)
-                .thenApply(ClusterEntityUtils::wrapToAppClusterServerState)
-                .thenApply(Result::ofSuccess)
-                .get();
+                    .thenApply(ClusterEntityUtils::wrapToAppClusterServerState)
+                    .thenApply(Result::ofSuccess)
+                    .get();
         } catch (ExecutionException ex) {
             logger.error("Error when fetching cluster server state of app: " + app, ex.getCause());
             return errorResponse(ex);
@@ -171,9 +164,9 @@ public class ClusterConfigController {
         }
         try {
             return clusterConfigService.getClusterUniversalState(app)
-                .thenApply(ClusterEntityUtils::wrapToAppClusterClientState)
-                .thenApply(Result::ofSuccess)
-                .get();
+                    .thenApply(ClusterEntityUtils::wrapToAppClusterClientState)
+                    .thenApply(Result::ofSuccess)
+                    .get();
         } catch (ExecutionException ex) {
             logger.error("Error when fetching cluster token client state of app: " + app, ex.getCause());
             return errorResponse(ex);
@@ -190,8 +183,8 @@ public class ClusterConfigController {
         }
         try {
             return clusterConfigService.getClusterUniversalState(app)
-                .thenApply(Result::ofSuccess)
-                .get();
+                    .thenApply(Result::ofSuccess)
+                    .get();
         } catch (ExecutionException ex) {
             logger.error("Error when fetching cluster state of app: " + app, ex.getCause());
             return errorResponse(ex);
@@ -208,10 +201,10 @@ public class ClusterConfigController {
     private boolean checkIfSupported(String app, String ip, int port) {
         try {
             return Optional.ofNullable(appManagement.getDetailApp(app))
-                .flatMap(e -> e.getMachine(ip, port))
-                .flatMap(m -> VersionUtils.parseVersion(m.getVersion())
-                    .map(v -> v.greaterOrEqual(version140)))
-                .orElse(true);
+                    .flatMap(e -> e.getMachine(ip, port))
+                    .flatMap(m -> VersionUtils.parseVersion(m.getVersion())
+                            .map(v -> v.greaterOrEqual(version140)))
+                    .orElse(true);
             // If error occurred or cannot retrieve machine info, return true.
         } catch (Exception ex) {
             return true;
