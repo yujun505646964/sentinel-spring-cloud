@@ -36,6 +36,7 @@ import java.util.Properties;
  */
 @Configuration
 public class NacosConfig {
+
     @Value("${nacos.namespace}")
     private String namespace= null;
     @Value("${nacos.serverAddr}")
