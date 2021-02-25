@@ -16,8 +16,10 @@
 package com.alibaba.csp.sentinel.dashboard;
 
 import com.alibaba.csp.sentinel.init.InitExecutor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.config.ConfigFileApplicationListener;
 
 /**
  * Sentinel dashboard application.
@@ -29,10 +31,20 @@ public class DashboardApplication {
 
     public static void main(String[] args) {
         triggerSentinelInit();
+        adjust();
         SpringApplication.run(DashboardApplication.class, args);
     }
 
     private static void triggerSentinelInit() {
         new Thread(() -> InitExecutor.doInit()).start();
     }
+
+    private static void adjust() {
+        String tier = System.getenv("THS_TIER");
+        if (StringUtils.isBlank(tier)) {
+            tier = "dev";
+        }
+        System.setProperty(ConfigFileApplicationListener.ACTIVE_PROFILES_PROPERTY,tier);
+    }
+
 }
