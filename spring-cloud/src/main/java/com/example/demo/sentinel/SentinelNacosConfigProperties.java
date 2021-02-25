@@ -13,13 +13,13 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "sentinel.nacos.server")
 public class SentinelNacosConfigProperties {
 
-    @Value("${sentinel:nacos:server.ip}")
+    @Value("${sentinel.nacos.server.ip}")
     private String ip;
-    @Value("${sentinel:nacos:server.port}")
+    @Value("${sentinel.nacos.server.port}")
     private String port;
-    @Value("${sentinel:nacos:server.namespace}")
+    @Value("${sentinel.nacos.server.namespace}")
     private String namespace;
-    @Value("${sentinel:nacos:server.groupId}")
+    @Value("${sentinel.nacos.server.groupId}")
     private String groupId;
     @Value("${spring.application.name}")
     private String applicationName;
