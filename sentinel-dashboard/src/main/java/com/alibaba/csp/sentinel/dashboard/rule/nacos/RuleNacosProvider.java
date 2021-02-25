@@ -19,7 +19,7 @@ public abstract class RuleNacosProvider<T extends RuleEntity> implements Dynamic
     @Override
     public List<T> getRules(String appName) throws Exception {
         String rules = configService.getConfig(appName + getDataIdPostfix(),
-                NacosConfigUtil.GROUP_ID, 3000);
+                getGroupId(appName), 3000);
         if (StringUtil.isEmpty(rules)) {
             return new ArrayList<>();
         }
@@ -32,4 +32,11 @@ public abstract class RuleNacosProvider<T extends RuleEntity> implements Dynamic
      * @return
      */
     public abstract String getDataIdPostfix();
+
+    /**
+     * @return
+     */
+    private String getGroupId(String appName) {
+        return appName.toUpperCase() + NacosConfigUtil.GROUP_ID_POSTFIX;
+    }
 }

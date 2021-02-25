@@ -23,7 +23,7 @@ public abstract class RuleNacosPublisher<T extends RuleEntity> implements Dynami
             return;
         }
         configService.publishConfig(app + getDataIdPostfix(),
-                NacosConfigUtil.GROUP_ID, converter.convert(rules));
+                getGroupId(app), converter.convert(rules));
     }
 
     /**
@@ -32,4 +32,11 @@ public abstract class RuleNacosPublisher<T extends RuleEntity> implements Dynami
      * @return
      */
     public abstract String getDataIdPostfix();
+
+    /**
+     * @return
+     */
+    private String getGroupId(String appName) {
+        return appName.toUpperCase() + NacosConfigUtil.GROUP_ID_POSTFIX;
+    }
 }
