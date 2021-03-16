@@ -16,7 +16,7 @@ public class ConsumerController {
 
     /*
      * blockHandler 方法必须public ,切返回值相同，参数相同，异常必须为BlockException
-     * 最好设置entryType = EntryType.IN（spring.cloud.sentinel.filter=true起作用的时候，也是IN类型，为什么@SentinelResource默认的是false）
+     * 最好设置entryType = EntryType.IN（spring.cloud.sentinel.filter=true起作用的时候，也是IN类型，为什么@SentinelResource默认的是OUT）
      *
      * */
     @SentinelResource(value = "/spring/hello",entryType = EntryType.IN)
