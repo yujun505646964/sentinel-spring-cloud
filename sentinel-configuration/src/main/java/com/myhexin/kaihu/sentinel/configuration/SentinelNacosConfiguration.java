@@ -59,9 +59,10 @@ public class SentinelNacosConfiguration {
     }
 
     private void loadFlowRules(Properties properties) {
-        ReadableDataSource<String, List<FlowRule>> flowRuleDataSource = new NacosDataSource<>(properties, SentinelNacosConfigUtils.getGroupId(appName), SentinelNacosConfigUtils.getFlowDataId(appName),
-                source -> JSON.parseObject(source, new TypeReference<List<FlowRule>>() {
-                }));
+        ReadableDataSource<String, List<FlowRule>> flowRuleDataSource = new NacosDataSource<>(
+                properties, SentinelNacosConfigUtils.getGroupId(appName), SentinelNacosConfigUtils.getFlowDataId(appName),
+                source -> JSON.parseObject(source, new TypeReference<List<FlowRule>>() {}
+                ));
         FlowRuleManager.register2Property(flowRuleDataSource.getProperty());
     }
 
