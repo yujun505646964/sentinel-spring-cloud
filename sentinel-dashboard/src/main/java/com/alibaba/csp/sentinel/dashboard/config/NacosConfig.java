@@ -42,6 +42,12 @@ public class NacosConfig {
     @Value("${nacos.serverAddr}")
     private String serverAddr = "localhost:8848";
 
+    @Value("${nacos.username:kaihu}")
+    private String username = "kaihu";
+
+    @Value("${nacos.password:kaihu123}")
+    private String password = "kaihu123";
+
     @Bean
     public Converter<List<FlowRuleEntity>, String> flowRuleEntityEncoder() {
         return JSON::toJSONString;
@@ -123,6 +129,9 @@ public class NacosConfig {
         Properties properties = new Properties();
         properties.setProperty(PropertyKeyConst.NAMESPACE, namespace);
         properties.setProperty(PropertyKeyConst.SERVER_ADDR, serverAddr);
+        properties.setProperty(PropertyKeyConst.USERNAME, serverAddr);
+        properties.setProperty(PropertyKeyConst.PASSWORD, password);
+
         return ConfigFactory.createConfigService(properties);
     }
 }
