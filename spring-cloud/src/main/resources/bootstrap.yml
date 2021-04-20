@@ -1,4 +1,8 @@
 spring:
+  application:
+    name: spring-cloud
+---
+spring:
   cloud:
     nacos:
       config:
@@ -6,13 +10,15 @@ spring:
         password: nacos
         context-path: /nacos
         server-addr: 121.40.116.220:8848
-        namespace:
+        namespace: kaihu-platform
+        group: ${spring.application.name}-group
       discovery:
         username: nacos
         password: nacos
         context-path: /nacos
         server-addr: 121.40.116.220:8848
-        namespace:
+        namespace: kaihu-platform
+        group: DEFAULT_GROUP
 sentinel:
   nacos:
     server:

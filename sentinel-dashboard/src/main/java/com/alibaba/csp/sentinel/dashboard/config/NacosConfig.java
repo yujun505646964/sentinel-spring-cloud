@@ -38,14 +38,14 @@ import java.util.Properties;
 public class NacosConfig {
 
     @Value("${nacos.namespace}")
-    private String namespace = null;
+    private String namespace = "kaihu-platform";
     @Value("${nacos.serverAddr}")
     private String serverAddr = "localhost:8848";
 
-    @Value("${nacos.username:kaihu}")
+    @Value("${nacos.username}")
     private String username = "kaihu";
 
-    @Value("${nacos.password:kaihu123}")
+    @Value("${nacos.password}")
     private String password = "kaihu123";
 
     @Bean
